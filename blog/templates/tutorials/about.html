@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}About{% endblock title %}
+{% block about %}active{% endblock about %}
+{% load static %}
+{% block body %}
+
+<!-- <h1>Courses</h1> -->
+
+<div class="container">
+    <div class="row my-4">
+
+{% for i in course%}
+<div class="col-md-4">
+<div class="card" style="width: 14rem; heigth:12rem">
+  <img src="{{i.photo.url}}" style="height:8rem;" class="card-img-top" alt="No Pictur Avalable">
+  <div class="card-body">
+    <h5 class="card-title text-center">{{i.title}}</h5>
+    
+    <div class="text-center"><a href="{{i.sno}}" class="btn btn-primary  my-3">Go To Topics</a></div>
+  </div>
+
+</div>
+</div>
+
+{% endfor %}
+
+
+</div>
+</div>
+
+<br>
+<br>
+<br>
+
+{% endblock body %}
+
+

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block about %}active{% endblock about %}
+    {% block body %}
+    <div class="container">
+        <div class="row my-4">
+        {% for i in topics %}
+        <div class="col-md-4">
+
+    <div class="card" style="width: 15rem; height:18rem;">
+        <img src="{{i.photo.url}}" class="card-img-top" alt="No Pictur Avalable">
+        <div class="card-body">
+          <h5 class="card-title text-center">{{i.title}}</h5>
+          
+          <div class="text-center"><a href="{% url 'contentpage' i.slug %}" class="btn btn-primary  my-3">Go To Page</a></div>
+        </div>
+      
+      </div>
+   
+</div>
+    {% endfor %}    
+</div>
+
+</div>
+    {% endblock body %}

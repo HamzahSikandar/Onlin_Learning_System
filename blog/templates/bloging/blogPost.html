@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% load extras %}
+{% block blog %}active{% endblock blog %}
+{% block title %}Blog Post{% endblock title %}
+{% block body %}
+
+
+<div class="container col-md-8 my-5 bg-light p-3 rounded">
+    
+
+    <article class="blog-post">
+
+      <h2 class="blog-post-title">{{post.title}}</h2>
+      <p class="blog-post-meta">{{post.timestamp}}<a href="#"> {{slug.author}}</a></p>
+      <div class="preview">
+      {{post.content|safe}}
+    </div>
+  </div>
+
+
+  <div class="container col-md-8 my-3 bg-light p-4 rounded">
+  {% if user.is_authenticated %}
+  <form action="/blog/postComment" method="post">
+    <div class="form-group">
+      {% csrf_token %}
+      <input  class="form-control my-1" type="text" name="comment" placeholder="Enter Comment Here">
+      <input type="hidden" name="postSno" value="{{post.sno}}" >
+      <input type="submit" class=" btn btn-primary my-1 " value="Submit">
+      <input type="hidden" name="parentSno" value="" >
+      
+    </div>
+  </form>
+
+  {% else%}
+  <p class="text-danger">*Please Login to Post a Comments<p>
+  {% endif %}
+      
+    
+
+  <!-- For Display comments -->
+  <h2>Comments ({{comments.count}})</h2>
+  <p>Post a Comment Here</p>
+  <div class="row ">
+  {% for comment in comments %}
+  <div class="col-md-1">
+  <!-- <img src="/static/images/userprofile.png " alt=""> -->
+  <img src="/static/images/userprofile.png" class="rounded w-100 p-2" alt="Cinque Terre">
+
+</div>
+<div class="col-md-11">
+  <b>{{comment.user.username}}</b><br>
+   at {{comment.timestamp|naturaltime }}
+  <div> {{ comment.comment }} </div>
+   
+
+  <!-- Reply Here -->
+  <div class="reply mx-0">
+  {% if user.is_authenticated %}
+  <button class="btn btn-sm btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#replyBox{{comment.sno}}" aria-expanded="false" aria-controls="replyBox{{comment.sno}}">
+    Reply
+  </button>
+
+<div class="collapse" id="replyBox{{comment.sno}}">
+  <div class="card card-body my-2">
+    <form action="/blog/postComment" method="post">
+      <div class="form-group">
+      {% csrf_token %}
+      
+      <label for="comment">Post a Reply</label>
+      <input type="text" class="form-control" name="comment" placeholder="Enter a Comment"> 
+      <input type="hidden" name="parentSno" value="{{comment.sno}}">
+    </div>
+    <input type="hidden" name="postSno" value="{{post.sno}}" >
+    <input type="submit" class=" btn btn-primary mt-2 " value="Submit">
+    </form>
+  </div>
+</div>  
+  {% else %}
+  <button class="btn btn-sm btn-primary" disabled type="button" data-bs-toggle="collapse" data-bs-target="#replyBox{{comment.sno}}" aria-expanded="false" aria-controls="replyBox{{comment.sno}}">
+    Login to Reply
+  </button>
+  {% endif %}
+
+
+    <div class="replies  mt-2">
+      {% for reply in replyDict|get_val:comment.sno  %}
+      <div class="row">
+        
+        <div class="col-md-1">
+          <img src="/static/images/userprofile.png" class="rounded w-100 p-2" alt="Cinque Terre">
+        </div>
+        <div class="col-md-11  ">
+          
+          <b>{{reply.user.username}}</b>
+          at {{reply.timestamp|naturaltime }} <br>
+          {{reply.comment}}  
+        </div>
+      </div>
+      {% endfor %}
+
+    </div>
+
+
+   
+    
+  </div>
+</div>
+  {% endfor %}
+</div>
+  </div>
+{% endblock body %}

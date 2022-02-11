@@ -1,0 +1,50 @@
+{% comment %} Nav bar here {% endcomment %}
+
+<nav class="navbar  navbar-expand-lg sticky-top navbar-dark bg-dark  ">
+<div class="container-fluid">
+  <a class="navbar-brand" href="/">MyAcademy</a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <li class="nav-item">
+        <a class="nav-link {% block home %}{% endblock home %}" aria-current="page" href="/">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {% block about %}{% endblock about %}" href="/about">About</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {% block blog %}{% endblock blog %}" href="/blog">Blog</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {% block contact %}{% endblock contact %}" href="/contact">Contact</a>
+      </li>
+      
+
+    </ul>
+    <form class="d-flex" method="get" action="/search">
+      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="query" id="query">
+      <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+    <!-- Login Button trigger modal -->
+    {% if user.is_authenticated %}
+    <!-- you are logedin as {{request.user}} -->
+    <!-- Logout Button -->
+    <a href="{% url 'handlelogout' %}" class="btn btn-danger mx-2">Logout</a>
+      
+    
+{% else %}
+<button type="button" class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#loginModal">
+  Login
+</button>
+
+<!-- Signup Button trigger modal -->
+<button type="button" class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#signupModal">
+Signup
+</button>
+{% endif %}
+
+  </div>
+</div>
+</nav>

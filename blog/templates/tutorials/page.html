@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block about %}active{% endblock about %}
+    {% block body %}
+    <div class="container my-4 bg-light p-4 rounded">
+    <div class="container">
+    {{topic.content|safe}}
+</div>
+</div>
+    {% endblock body %}

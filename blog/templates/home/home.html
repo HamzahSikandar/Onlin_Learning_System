@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock title %}
+{% block home %}active{% endblock home %}
+{% load static %}
+{% block body %}
+
+
+<!-- Crousal Here -->
+
+<div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="/static/images/home_Background_images/laptop-with-man.jpg" style="width: 100vh; height: 91.5vh; opacity: 0.7;" class="d-block w-100" alt="...">
+    </div>
+
+    <div class="carousel-caption d-none d-md-block">
+      <h1 style="margin-bottom: 270px; font-size: 90px; text-shadow: black;">My Academy</h1>
+      
+    </div>
+
+   
+  </div>
+</div>
+
+<div class="container">
+<!-- End of Crousal -->
+<div class="row my-5">
+
+  <div class="col-md-4" data-aos="fade-right" data-aos-duration="1500">
+    <a class="text-decoration-none" href="{% url 'about' %}">
+    <div class="card" style="width:15rem; ">
+    <div class="text-center">
+      <img src="/static/images/courses.jpg" class="card-img-top mt-3" style="width:10rem; height:10rem;" alt="...">
+    </div>
+      <div class="card-body text-center">
+        <h3 class="card-title mt-2 fw-bold text-dark"  >Courses</h3>
+        
+      </div>
+    </div>
+    </a>
+  </div>
+
+
+
+
+
+<div class="col-md-4" data-aos="zoom-out-down" data-aos-duration="1500">
+  <a class="text-decoration-none" href="{% url 'blogHome' %}">
+  <div class="card" style="width:15rem; ">
+  <div class="text-center">
+    <img src="/static/images/BLOG.jpg" class="card-img-top mt-3" style="width:10rem; height:10rem;" alt="...">
+  </div>
+    <div class="card-body text-center">
+      <h3 class="card-title mt-2 fw-bold text-dark"  >Bologs</h3>
+      
+    </div>
+  </div>
+  </a>
+</div>
+
+
+<div class="col-md-4" data-aos="fade-left" data-aos-duration="1500">
+  <a class="text-decoration-none" href="{% url 'contact' %}">
+  <div class="card" style="width:15rem; ">
+  <div class="text-center">
+    <img src="/static/images/contact.jpg" class="card-img-top mt-3" style="width:10rem; height:10rem;" alt="...">
+  </div>
+    <div class="card-body text-center">
+      <h3 class="card-title mt-2 fw-bold text-dark"  >Contact Us</h3>
+      
+    </div>
+  </div>
+  </a>
+</div>
+
+
+
+
+</div>
+
+</div>
+
+
+{% endblock body %}
